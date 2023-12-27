@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 import numpy as np
 
-final_df = pd.read_csv('C:/Users/SMART COMPUTER/Untitled Folder 5/match.csv')
+final_df = pd.read_csv('match.csv')
 final_df=final_df.drop(columns=['Unnamed: 0'])
 # st.write(df)
 X = final_df.drop(columns=['runs_x'])
