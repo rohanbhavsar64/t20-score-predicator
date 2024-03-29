@@ -94,8 +94,8 @@ if st.button('Prediction & Analysis') and a!=b:
     st.write(fig)
     df1 = final_df[final_df['battingTeam'] == a][final_df[final_df['battingTeam'] == a]['ball_left'] == 0]
     fig1=px.scatter(df1[df1['bowlingTeam']==b].tail(10),y='Score',color_discrete_sequence=['purple'],title='Totals Against '+b)
-    fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', xaxis_title='matches')
-    fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+    fig1.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', xaxis_title=None)
+    fig1.update_traces(texttemplate='%{text:.2s}', textposition='outside')
     fig1.update_traces(marker=dict(size=10,
                                    line=dict(width=2,
                                              color='rgba(135, 206, 250, 0.5)')),
@@ -104,6 +104,7 @@ if st.button('Prediction & Analysis') and a!=b:
     st.write(fig1)
     df2=final_df[final_df['city'] == c][final_df[final_df['city'] == c]['ball_left'] == 0]
     fig2 = px.line(df2,y='Score', color_discrete_sequence=['Purple'],title='Satuts of Ground in Previous match')
+    fig2.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', xaxis_title=None)
     st.write(fig2)
     st.subheader('facts')
     st.write('Avg. Runs Scored by '+a+' in last '+str(e/6)+' overs is: '+str(int(b1-a1)))
