@@ -2,7 +2,6 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
-from streamlit_lottie import st_lottie
 final_df = pd.read_csv('match.csv')
 final_df=final_df.drop(columns=['Unnamed: 0'])
 # st.write(df)
