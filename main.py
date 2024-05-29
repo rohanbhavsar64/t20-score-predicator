@@ -96,6 +96,11 @@ if st.button('Prediction & Analysis') and a!=b:
     st.write('Avg. Runs Scored by '+a+' in last '+str(e/6)+' overs is: '+str(int(b1-a1)))
     st.write('Avg. Runs given by '+b+' in last '+str(e/6)+' overs is: '+str(int(x2-x1)))
     st.write('Avg. Runs Scored in ' + c + ' in last ' + str(e / 6) + ' overs is: ' + str(int(s2 - s1)))
+    t=(120-e)/6
+    x=[0,d-h,d,n[0]]
+    y=[0,t-3,t,20]
+    i=px.line(x)
+    st.write(i)
 
 
 
