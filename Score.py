@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load your dataset (replace with your actual dataset)
-# df = pd.read_csv("path/to/your/dataset.csv")
+# df = pd.read_csv("match.csv")
 
 def create_per_over_score_prediction_chart():
     st.title("IPL Per-Over Score Prediction Chart")
