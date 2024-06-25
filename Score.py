@@ -15,7 +15,7 @@ def create_per_over_score_prediction_chart():
     match_data = df[df["match_id"] == match_id]
 
     # Calculate cumulative runs per over
-    match_data["cumulative_runs"] = match_data.groupby("over")["total_runs_x"].cumsum()
+    match_data["cumulative_runs"] = match_data.groupby("over")["runs"].cumsum()
 
     # Create the per-over score prediction chart
     plt.figure(figsize=(10, 6))
