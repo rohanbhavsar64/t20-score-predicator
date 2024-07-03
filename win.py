@@ -6,7 +6,7 @@ df['Score']=df.groupby('matchId').cumsum()['runs']
 df.drop(columns=[
      'tossWinner'
 ],inplace=True)
-df=df.dropna()
+df['matchId']=df['matchId'].str.split('_').str[0].astype(int)
 df['Score']=df.groupby('matchId').cumsum()['runs']
 df['over']=df['balls'].astype(str)
 df['overs']=df['over'].str.split('.').str.get(0).astype(int)
