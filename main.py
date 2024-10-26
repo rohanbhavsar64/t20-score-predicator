@@ -2,6 +2,8 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
+import requests
+from bs4 import BeautifulSoup
 o=st.number_input('Over No.(Not Greater Than Overs Played in 2nd Innings)') or 20
 h = st.text_input('URL( ESPN CRICINFO >Select Match > Click On Overs )') or 'https://www.espncricinfo.com/series/india-in-west-indies-2023-1381201/west-indies-vs-india-1st-t20i-1381217/match-overs-comparison'
 if (h=='https://www.espncricinfo.com/series/india-in-west-indies-2023-1381201/west-indies-vs-india-1st-t20i-1381217/match-overs-comparison'):
