@@ -218,6 +218,75 @@ shar=['Lauderhill', 'St Lucia', 'Bangalore', 'Nottingham', 'Cape Town',
        'Guwahati', 'Kimberley', 'Taunton', 'Edinburgh']
 wic=['0','1','2','3','4','5','6','7','8','9']
 st.title('T20I Match Score Predictor')
+def match_progression(x_df,match_id,pipe):
+    match = x_df[x_df['match_id'] == match_id]
+    match = match[(match['balls_left']%6 == 0)]
+    temp_df = match[['batting_team','bowling_team','venue','score','wickets','runs_left','balls_left','crr','rrr','last_10','last_10_wicket']].fillna(0)
+    temp_df = temp_df[temp_df['balls_left'] != 0]
+    if temp_df.empty:
+        print("Error: Match is not Existed")
+        return None, None
+    result = pipe.predict_proba(temp_df)
+    temp_df['lose'] = np.round(result.T[0]*100,1)
+    temp_df['win'] = np.round(result.T[1]*100,1)
+    temp_df['end_of_over'] = (120-temp_df['balls_left'])/6    
+    target = (temp_df['score']+temp_df['runs_left']+1).values[0]
+    runs = temp_df['runs_left'].tolist()
+    new_runs = runs[:]
+    runs.insert(0,target)
+    temp_df['runs_after_over'] = np.array(runs)[:-1] - np.array(new_runs)
+    temp_df['batting_team']=match['batting_team']
+    temp_df['bowling_team']=match['bowling_team']
+    wickets = (10 - temp_df['wickets']).tolist()
+    new_wickets = wickets[:]
+    new_wickets.insert(0,10)
+    wickets.append(0)
+    w = np.array(wickets)
+    nw = np.array(new_wickets)
+    temp_df['wickets_in_over'] = (nw-w)[0:temp_df.shape[0]]
+    temp_df['wickets']=temp_df['wickets_in_over'].cumsum()
+    temp_df['venue']=match['venue']
+    temp_df['score']=match['score']
+    print("Target-",target)
+    temp_df = temp_df[['batting_team','bowling_team','end_of_over','runs_after_over','wickets_in_over','score','wickets','lose','win','venue']]
+    return temp_df,target
+
+temp_df, target = match_progression(gf,100001, pipe)
+temp_df=temp_df[temp_df['runs_after_over']>=0]
+temp_df = temp_df[temp_df['wickets_in_over'] >= 0]
+import plotly.graph_objects as go
+import plotly.express as px
+       
+fig1 = go.Figure()
+        
+midpoint = 50
+a2=gf['bowling_team'].unique()[0]
+b2=gf['batting_team'].unique()[0]
+
+# Line chart for batting and bowling teams
+import plotly.graph_objects as go
+import plotly.express as px
+fig2=go.Figure()
+runs = fig2.add_trace(go.Bar(x=temp_df['end_of_over'], y=temp_df['runs_after_over'], name='Runs in Over',marker_color='purple'))
+wicket_text = temp_df['wickets_in_over'].astype(str)
+wicket_y = temp_df['runs_after_over']+temp_df['wickets_in_over']*0.4  # adjust y-position based on wickets
+wicket_y[wicket_y == temp_df['runs_after_over']] = None  # hide scatter points for 0 wickets
+wicket = fig2.add_trace(go.Scatter(x=temp_df['end_of_over'], y=wicket_y,  # use adjusted y-position
+                                  mode='markers', name='Wickets in Over',
+                                  marker_color='orange',marker_size=11,
+                                  text=wicket_text, textposition='top center'))
+fig2.update_layout(title='Innings Progression')
+fig3 = go.Figure()
+batting_team = fig3.add_trace(go.Scatter(x=temp_df.iloc[10:,:]['end_of_over'], y=temp_df.iloc[10:,:]['win'], mode='lines', name=temp_df['batting_team'].unique()[0],line_color='green', line_width=4))
+bowling_team = fig3.add_trace(go.Scatter(x=temp_df.iloc[10:,:]['end_of_over'], y=temp_df.iloc[10:,:]['lose'], mode='lines', name=temp_df['bowling_team'].unique()[0],line_color='red', line_width=4))
+fig3.update_layout(
+    title='Target-' + str(target),
+    height=700  # Set the height of the chart
+)
+fig3.update_layout(title='Win Probablity Of Teams :Target-' + str(target))
+
+
+tf=gf[['batting_team','bowling_team','venue','score','wickets','runs_left','balls_left','crr','rrr','last_10','last_10_wicket']]
 col1,col2,col3=st.columns(3)
 with col1:
     a = st.selectbox('Batting Team',sorted(batting))
