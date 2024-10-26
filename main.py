@@ -137,9 +137,19 @@ else:
     else:
       st.write("Winner information not available.")
 import plotly.graph_objects as go
-fig = go.Figure(data=[ go.scatter(x=df1['over'], y=df1['inng1'],line_width=3,line_color='red',name=df['bowling_team'].unique()[0]), 
-                      go.scatter(x=lf['over'], y=lf['score'],line_width=3,line_color='green',name=df['batting_team'].unique()[0]) ])
-fig.update_layout(title='Score Comperison', xaxis_title='Over', yaxis_title='Score')
+
+# Create the figure
+fig = go.Figure(data=[
+    go.Scatter(x=df1['over'], y=df1['inng1'], mode='lines', line=dict(width=3, color='red'), name=df['bowling_team'].unique()[0]),
+    go.Scatter(x=lf['over'], y=lf['score'], mode='lines', line=dict(width=3, color='green'), name=df['batting_team'].unique()[0])
+])
+
+# Update the layout
+fig.update_layout(title='Score Comparison', xaxis_title='Over', yaxis_title='Score')
+
+# Assuming you are using Streamlit to display the figure
+
+# Display the figure in Streamlit
 st.write(fig)
 gf=df
 final_df = pd.read_csv('match.csv')
