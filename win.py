@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 df=pd.read_csv('2nd Innings T20.csv') 
 first=pd.read_csv('1st Innings T20.csv')
-df['Score']=df.groupby('matchId').cumsum()['runs']
 df.drop(columns=[
      'tossWinner'
 ],inplace=True)
