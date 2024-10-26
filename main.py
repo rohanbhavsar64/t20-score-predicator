@@ -143,7 +143,7 @@ fig = go.Figure(data=[
 ])
 
 fig.update_layout(title='Score Comparison',
-                  xaxis_title='Over',  # This is where we specify the x-axis title
+                  xaxis_title='Over',
                   yaxis_title='Score')
 st.write(fig)
 gf=df
