@@ -57,9 +57,9 @@ wic=['0','1','2','3','4','5','6','7','8','9']
 st.title('T20I Match Score Predictor')
 col1,col2,col3=st.columns(3)
 with col1:
-    a = st.selectbox('batting_team',sorted(batting))
+    a = st.selectbox('Batting Team',sorted(batting))
 with col2:
-    b = st.selectbox('bowling',sorted(batting))
+    b = st.selectbox('Bowling Team',sorted(batting))
 with col3:
     c= st.selectbox('city',sorted(shar))
 col1,col2,col3=st.columns(3)
