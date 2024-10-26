@@ -150,7 +150,7 @@ try:
     fig.update_layout(title='Score Comparison', xaxis_title='Over', yaxis_title='Score')
 
     # Display the figure
-    st.write(fig)
+    st.write(df['bowling_team'])
 
 except Exception as e:
     st.error(f"An error occurred: {e}")
