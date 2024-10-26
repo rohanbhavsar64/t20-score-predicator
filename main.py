@@ -139,17 +139,21 @@ else:
 import plotly.graph_objects as go
 
 # Create the figure
-fig = go.Figure(data=[go.Scatter(x=df1['over'], y=df1['inng1'], mode='lines', line=dict(width=3, color='red'), name=df['bowling_team'].unique()[0]),
-                      go.Scatter(x=lf['over'], y=lf['score'], mode='lines', line=dict(width=3, color='green'), name=df['batting_team'].unique()[0])
-                     ])
+try:
+    # Create the figure
+    fig = go.Figure(data=[
+        go.Scatter(x=df1['over'], y=df1['inng1'], mode='lines', line=dict(width=3, color='red'), name=df['bowling_team'].unique()[0]),
+        go.Scatter(x=lf['over'], y=lf['score'], mode='lines', line=dict(width=3, color='green'), name=df['batting_team'].unique()[0])
+    ])
 
-# Update the layout
-fig.update_layout(title='Score Comparison', xaxis_title='Over', yaxis_title='Score')
+    # Update layout
+    fig.update_layout(title='Score Comparison', xaxis_title='Over', yaxis_title='Score')
 
-# Assuming you are using Streamlit to display the figure
+    # Display the figure
+    st.write(fig)
 
-# Display the figure in Streamlit
-st.write(fig)
+except Exception as e:
+    st.error(f"An error occurred: {e}")
 gf=df
 final_df = pd.read_csv('match.csv')
 final_df=final_df.drop(columns=['Unnamed: 0'])
