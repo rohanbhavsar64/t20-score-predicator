@@ -144,6 +144,7 @@ fig = go.Figure(data=[
 fig.update_layout(title='Score Comperison',
                   xaxis_title='Over',
                   yaxis_title='Score')
+st.write(fig)
 gf=df
 final_df = pd.read_csv('match.csv')
 final_df=final_df.drop(columns=['Unnamed: 0'])
