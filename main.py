@@ -140,17 +140,27 @@ import plotly.graph_objects as go
 
 # Create the figure
 try:
-    # Create the figure
     fig = go.Figure(data=[
-        go.Scatter(x=df1['over'], y=df1['inng1'], mode='lines', line=dict(width=3, color='red'), name=df['bowling_team'].unique()[0]),
-        go.Scatter(x=lf['over'], y=lf['score'], mode='lines', line=dict(width=3, color='green'), name=df['batting_team'].unique()[0])
+        go.Scatter(
+            x=df1['over'], 
+            y=df1['inng1'], 
+            mode='lines', 
+            line=dict(width=3, color='red'), 
+            name=df['bowling_team'].unique()[0]
+        ),
+        go.Scatter(
+            x=lf['over'], 
+            y=lf['score'], 
+            mode='lines', 
+            line=dict(width=3, color='green'), 
+            name=df['batting_team'].unique()[0]
+        )
     ])
 
-    # Update layout
     fig.update_layout(title='Score Comparison', xaxis_title='Over', yaxis_title='Score')
 
     # Display the figure
-    st.write(df['batting_team'])
+    st.write(fig)
 
 except Exception as e:
     st.error(f"An error occurred: {e}")
