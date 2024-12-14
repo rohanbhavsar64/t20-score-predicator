@@ -12,3 +12,5 @@ image_path = df[df['0'] == a]['5'].values[0]  # Use .values[0] to get the first 
 
 # Display the image
 st.image(image_path, caption=f'Image of {a}', use_container_width=True)
+desc=df[df['0'] == a]['8'].values[0]
+st.write(desc)
