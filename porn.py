@@ -42,7 +42,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import r2_score,mean_absolute_error
 x=df['8']
 y=df['0']
-encoder = OneHotEncoder(sparse=False)
+encoder = OneHotEncoder()
 y = encoder.fit_transform(y.reshape(-1, 1))
 
 # Split the dataset into training and testing sets
