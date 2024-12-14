@@ -44,18 +44,10 @@ x=df['8']
 y=df['0']
 encoder = OneHotEncoder()
 y = encoder.fit_transform(df[['0']])
-
+x = encoder.fit_transform(df[['8']])
 # Split the dataset into training and testing sets
 X_train, X_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=1)
-trf = ColumnTransformer([
-    ('trf',OneHotEncoder(sparse_output=False,handle_unknown = 'ignore'),['8'])],remainder='passthrough')
-scaler=StandardScaler()
-pipe = Pipeline(steps=[
-    ('step1',trf),
-    ('step3', model())
-])
-pipe.fit(X_train,y_train)
-y_pred = pipe.predict(X_test)
+
 
 # Evaluate the model on the test set
 test_loss, test_accuracy = model.evaluate(X_test.astype('float32') / 255.0, encoder.transform(y_test.reshape(-1, 1)))
