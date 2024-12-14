@@ -21,14 +21,28 @@ desc=df[df['0'] == a]['8'].values[0]
 st.write(desc)
 x=df['8']
 y=df['0']
-from sklearn.model_selection import train_test_split
-X_train,X_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=1)
+encoder = OneHotEncoder(sparse=False)
+y = encoder.fit_transform(y.reshape(-1, 1))
+
+# Split the dataset into training and testing sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
+
+# Build the model
 model = keras.models.Sequential()
-model.add(keras.layers.Flatten(input_shape=[28,28]))
-model.add(keras.layers.Dense(300, activation = "relu"))
-model.add(keras.layers.Dense(100, activation = "relu"))
-model.add(keras.layers.Dense(10, activation = "softmax"))
-history = model.fit(X_train, y_train, epochs=30)
+model.add(keras.layers.Flatten(input_shape=[28, 28]))
+model.add(keras.layers.Dense(300, activation="relu"))
+model.add(keras.layers.Dense(100, activation="relu"))
+model.add(keras.layers.Dense(10, activation="softmax"))
+
+# Compile the model
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+history = model.fit(X_train, y_train, epochs=30, validation_data=(X_val, y_val))
+
+# Evaluate the model on the test set
+test_loss, test_accuracy = model.evaluate(X_test.astype('float32') / 255.0, encoder.transform(y_test.reshape(-1, 1)))
+print(f'Test accuracy: {test_accuracy:.4f}')
 import pandas as pd
 
 pd.DataFrame(history.history).plot(figsize=(15,8))
