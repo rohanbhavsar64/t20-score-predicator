@@ -31,6 +31,7 @@ model.add(keras.layers.Dense(10, activation="softmax"))
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train the modelfrom sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline
