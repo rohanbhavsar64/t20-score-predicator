@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
-
+import tensorflow as tf
+from tensorflow import keras
 # Load the CSV file
 df = pd.read_csv('pornstars_0.csv')
 
@@ -17,5 +18,8 @@ st.image(image_path, caption=f'Image of {a}', use_container_width=True)
 
 desc=df[df['0'] == a]['8'].values[0]
 st.write(desc)
+x=df['8']
+y=df['0']
+
 
 
