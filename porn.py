@@ -9,3 +9,4 @@ image_path = df['5'][5]
 
 # Display the image with the updated parameter
 st.image(image_path, caption='Image from DataFrame', use_container_width=True)
+st.write(image_path)
