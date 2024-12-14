@@ -19,13 +19,6 @@ st.image(image_path, caption=f'Image of {a}', use_container_width=True)
 
 desc=df[df['0'] == a]['8'].values[0]
 st.write(desc)
-x=df['8']
-y=df['0']
-encoder = OneHotEncoder(sparse=False)
-y = encoder.fit_transform(y.reshape(-1, 1))
-
-# Split the dataset into training and testing sets
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
 
 # Build the model
 model = keras.models.Sequential()
@@ -37,8 +30,30 @@ model.add(keras.layers.Dense(10, activation="softmax"))
 # Compile the model
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Train the model
-history = model.fit(X_train, y_train, epochs=30, validation_data=(X_val, y_val))
+# Train the modelfrom sklearn.preprocessing import OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import r2_score,mean_absolute_error
+x=df['8']
+y=df['0']
+encoder = OneHotEncoder(sparse=False)
+y = encoder.fit_transform(y.reshape(-1, 1))
+
+# Split the dataset into training and testing sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
+trf = ColumnTransformer([
+    ('trf',OneHotEncoder(sparse_output=False,handle_unknown = 'ignore'),['8'])],remainder='passthrough')
+scaler=StandardScaler()
+pipe = Pipeline(steps=[
+    ('step1',trf),
+    ('step3', model())
+])
+pipe.fit(X_train,y_train)
+y_pred = pipe.predict(X_test)
 
 # Evaluate the model on the test set
 test_loss, test_accuracy = model.evaluate(X_test.astype('float32') / 255.0, encoder.transform(y_test.reshape(-1, 1)))
