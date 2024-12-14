@@ -43,7 +43,7 @@ from sklearn.metrics import r2_score,mean_absolute_error
 x=df['8']
 y=df['0']
 encoder = OneHotEncoder()
-y = encoder.fit_transform(df['0'])
+y = encoder.fit_transform(df[['0']])
 
 # Split the dataset into training and testing sets
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
