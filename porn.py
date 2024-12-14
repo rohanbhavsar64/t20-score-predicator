@@ -47,12 +47,10 @@ encoder = OneHotEncoder()
 y = encoder.fit_transform(df[['0']])
 x = encoder.fit_transform(df[['8']])
 # Split the dataset into training and testing sets
-X_train, X_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=1)
-
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
+model.fit(X_train,y_train)
 
 # Evaluate the model on the test set
-test_loss, test_accuracy = model.evaluate(X_test.astype('float32') / 255.0, encoder.transform(y_test.reshape(-1, 1)))
-print(f'Test accuracy: {test_accuracy:.4f}')
 import pandas as pd
 
 pd.DataFrame(history.history).plot(figsize=(15,8))
