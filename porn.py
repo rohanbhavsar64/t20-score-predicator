@@ -27,7 +27,7 @@ x = df[['8']]  # Features (make sure it's a DataFrame)
 y = df['0']    # Target variable
 
 # One-hot encode the target variable
-encoder = OneHotEncoder(sparse=False)  # Use sparse=False to get a dense array
+encoder = OneHotEncoder()  # Use sparse=False to get a dense array
 y_encoded = encoder.fit_transform(y.values.reshape(-1, 1))  # Reshape y to 2D
 
 # Split the dataset into training and testing sets
