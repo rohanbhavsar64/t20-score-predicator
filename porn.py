@@ -28,7 +28,7 @@ model.add(keras.layers.Flatten(input_shape=[28,28]))
 model.add(keras.layers.Dense(300, activation = "relu"))
 model.add(keras.layers.Dense(100, activation = "relu"))
 model.add(keras.layers.Dense(10, activation = "softmax"))
-history = model.fit(X_train, y_train, epochs=30, batch_size=32)
+history = model.fit(X_train, y_train, epochs=30)
 import pandas as pd
 
 pd.DataFrame(history.history).plot(figsize=(15,8))
