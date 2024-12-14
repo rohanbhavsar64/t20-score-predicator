@@ -46,7 +46,7 @@ encoder = OneHotEncoder()
 y = encoder.fit_transform(df[['0']])
 
 # Split the dataset into training and testing sets
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
+X_train, X_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=1)
 trf = ColumnTransformer([
     ('trf',OneHotEncoder(sparse_output=False,handle_unknown = 'ignore'),['8'])],remainder='passthrough')
 scaler=StandardScaler()
