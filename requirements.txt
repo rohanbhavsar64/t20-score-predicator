@@ -7,3 +7,4 @@ plotly
 bs4
 requests
 keras
+tensorflow
