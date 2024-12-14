@@ -18,3 +18,4 @@ st.image(image_path, caption=f'Image of {a}', use_container_width=True)
 desc=df[df['0'] == a]['8'].values[0]
 st.write(desc)
 
+
