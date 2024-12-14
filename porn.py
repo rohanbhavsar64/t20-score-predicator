@@ -9,7 +9,7 @@ df = pd.read_csv('pornstars_0.csv')
 # Create a selectbox for names
 a = st.selectbox('Name', df['0'].unique())
 
-# Get the image path for the selected name
+# Get the image path for the selected nam
 image_path = df[df['0'] == a]['5'].values[0]  # Use .values[0] to get the first element
 #image_path1 = df[df['0'] == a]['1'].values[0]  # Use .values[0] to get the first element
 
@@ -22,7 +22,7 @@ st.write(desc)
 
 # Build the model
 model = keras.models.Sequential()
-model.add(keras.layers.Flatten(input_shape=[28, 28]))
+model.add(keras.layers.Flatten(input_shape=[1]))
 model.add(keras.layers.Dense(300, activation="relu"))
 model.add(keras.layers.Dense(100, activation="relu"))
 model.add(keras.layers.Dense(10, activation="softmax"))
