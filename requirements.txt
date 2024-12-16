@@ -9,4 +9,3 @@ requests
 keras
 tensorflow
 requests
-tqdm==4.19.6
