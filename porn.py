@@ -73,7 +73,7 @@ def download_images(image_urls, output_dir):
             local_paths.append(None)  # Mark as None if download fails
     return local_paths
 
-# Download training and testing images
+# Download training and testing image
 X_train = download_images(X_train, download_dir)
 X_test = download_images(X_test, download_dir)
 
