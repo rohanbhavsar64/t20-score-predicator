@@ -134,7 +134,7 @@ model = Sequential([
 model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train the model
-model.fit(train_generator, epochs=10, validation_data=test_generator)
+model.fit(train_generator, epochs=10)
 
 # Save the model
 model.save('image_detection_model.h5')
