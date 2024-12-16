@@ -29,6 +29,7 @@ import os
 import requests
 import pandas as pd
 import numpy as np
+from tqdm import tqdm
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
@@ -60,10 +61,7 @@ os.makedirs(download_dir, exist_ok=True)
 # Function to download images
 def download_images(image_urls, output_dir):
     local_paths = []
-    total_images = len(image_urls)
-    
-    # Print the progress using simple print statements
-    for i, url in enumerate(image_urls):
+    for url in tqdm(image_urls, desc="Downloading images"):
         try:
             filename = os.path.join(output_dir, os.path.basename(url.split("?")[0]))
             response = requests.get(url, timeout=10)
@@ -74,11 +72,6 @@ def download_images(image_urls, output_dir):
         except Exception as e:
             print(f"Failed to download {url}: {e}")
             local_paths.append(None)  # Mark as None if download fails
-        
-        # Print progress after every 10th image (or you can adjust as needed)
-        if (i + 1) % 10 == 0 or i == total_images - 1:
-            print(f"Downloaded {i + 1}/{total_images} images.")
-    
     return local_paths
 
 # Download training and testing images
@@ -134,7 +127,8 @@ model = Sequential([
 model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train the model
-model.fit(train_generator, epochs=2)
+model.fit(train_generator, epochs=10)
 
 # Save the model
 model.save('image_detection_model.h5')
+
