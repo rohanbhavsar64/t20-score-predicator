@@ -8,5 +8,4 @@ bs4
 requests
 keras
 tensorflow
-os
 requests
