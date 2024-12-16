@@ -60,7 +60,10 @@ os.makedirs(download_dir, exist_ok=True)
 # Function to download images
 def download_images(image_urls, output_dir):
     local_paths = []
-    for url in tqdm(image_urls, desc="Downloading images"):
+    total_images = len(image_urls)
+    
+    # Print the progress using simple print statements
+    for i, url in enumerate(image_urls):
         try:
             filename = os.path.join(output_dir, os.path.basename(url.split("?")[0]))
             response = requests.get(url, timeout=10)
@@ -71,9 +74,14 @@ def download_images(image_urls, output_dir):
         except Exception as e:
             print(f"Failed to download {url}: {e}")
             local_paths.append(None)  # Mark as None if download fails
+        
+        # Print progress after every 10th image (or you can adjust as needed)
+        if (i + 1) % 10 == 0 or i == total_images - 1:
+            print(f"Downloaded {i + 1}/{total_images} images.")
+    
     return local_paths
 
-# Download training and testing image
+# Download training and testing images
 X_train = download_images(X_train, download_dir)
 X_test = download_images(X_test, download_dir)
 
@@ -126,14 +134,7 @@ model = Sequential([
 model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train the model
-model.fit(train_generator, epochs=10)
+model.fit(train_generator, epochs=10, validation_data=test_generator)
 
 # Save the model
 model.save('image_detection_model.h5')
-
-
-
-
-
-
-
