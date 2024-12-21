@@ -14,11 +14,10 @@ a = st.selectbox('Name', df['0'].unique())
 
 # Get the image path for the selected name
 image_path = df[df['0'] == a]['5'].values[0]  # Use .values[0] to get the first element
-image_path1 = f'https://www.sexvid.pro/pornstars/{a}/'  # Use .values[0] to get the first element
+
 
 # Display the image
 st.image(image_path, caption=f'Image of {a}', use_container_width=True)
-st.image(image_path1, caption=f'Image of {a}', use_container_width=True)
 desc = df[df['0'] == a]['8'].values[0]
 st.write(desc)
 
