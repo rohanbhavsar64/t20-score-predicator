@@ -66,6 +66,6 @@ video_urls = scrape_video_urls(html_content)
 
 # Print the extracted video URLs
 for url in video_urls:
-    print(url)
+    st.write(url)
 # Display the video
 st.video(url, format="mp4", start_time=0,subtitles=None, end_time='358s', loop=False, autoplay=False, muted=False)
