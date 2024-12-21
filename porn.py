@@ -24,7 +24,7 @@ st.write(desc)
 # Prepare the data for model training
 x = df[['8']]  # Features (make sure it's a DataFrame)
 y = df['0']    # Target variable
-
+a=a.strip().replace(" ", "-").lower()
 # Title of the app
 from bs4 import BeautifulSoup
 import requests 
