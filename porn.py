@@ -32,4 +32,4 @@ y = df['0']    # Target variable
 video_url = "https://cdn1.sexvid.pro/contents/videos_screenshots/9000/9400/284x160/3.jpg"  # Replace with actual video URL
 
 # Display the video
-st.video(video_url.mp4)
+st.video(video_url, format="mp4", start_time=0,subtitles=None, end_time='358s', loop=False, autoplay=False, muted=False)
