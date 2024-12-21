@@ -28,4 +28,10 @@ st.write(desc)
 x = df[['8']]  # Features (make sure it's a DataFrame)
 y = df['0']    # Target variable
 
+# Title of the app
 
+# Video URL
+video_url = "https://cdn1.sexvid.pro/contents/videos_screenshots/9000/9400/284x160/3.jpg"  # Replace with actual video URL
+
+# Display the video
+st.video(video_url)
