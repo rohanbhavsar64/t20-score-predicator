@@ -85,6 +85,6 @@ for url in video_urls:
 for url in title:
     l1.append(url)
 # Display the video
-for i in range(len(l1)):
+for i in range(len(l)):
     st.video(l[i], format="mp4")
     st.write(l1[i])
