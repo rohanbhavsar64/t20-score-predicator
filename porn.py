@@ -76,11 +76,15 @@ html_content = str(thumbs_section)
 
 # Scrape the video URLs from the new html_content
 video_urls = scrape_video_urls(html_content)
-
+title = scrape_tile(html_content)
 # Print the extracted video URLs
 l=[]
+l1=[]
 for url in video_urls:
     l.append(url)
+for url in title:
+    l1.append(url)
 # Display the video
-for fruit in l:
-    st.video(fruit, format="mp4")
+for i in range(len(L)):
+    st.video(l[i], format="mp4")
+    st.write(l1[i])
