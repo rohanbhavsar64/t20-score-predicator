@@ -19,7 +19,7 @@ image_path1 = f'https://www.sexvid.pro/pornstars/{a}/'  # Use .values[0] to get 
 # Display the image
 st.image(image_path, caption=f'Image of {a}', use_container_width=True)
 st.image(image_path1, caption=f'Image of {a}', use_container_width=True)
-st.video(image_path1, format="mp4", start_time=0, subtitles=None, end_time='34s', loop=False, autoplay=False, muted=False)
+st.video(image_path1, format="mp4", start_time=0, subtitles=None, end_time=None, loop=False, autoplay=False, muted=False)
 # Display the description
 desc = df[df['0'] == a]['8'].values[0]
 st.write(desc)
