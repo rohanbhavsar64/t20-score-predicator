@@ -70,4 +70,4 @@ for url in video_urls:
     l.append(url)
 # Display the video
 for fruit in l:
-    st.video(fruit, format="mp4", start_time=0,subtitles=None, loop=False, autoplay=False, muted=False)
+    st.video(fruit, format="mp4")
