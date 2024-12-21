@@ -29,7 +29,7 @@ y = df['0']    # Target variable
 # Title of the app
 
 # Video URL
-video_url = "https://cdn1.sexvid.pro/contents/videos_screenshots/9000/9400/284x160/3.jpg"  # Replace with actual video URL
+video_url = "https://pr1.sexvid.pro/contents/videos/9000/9400/9400_short_preview.mp4"  # Replace with actual video URL
 
 # Display the video
 st.video(video_url, format="mp4", start_time=0,subtitles=None, end_time='358s', loop=False, autoplay=False, muted=False)
