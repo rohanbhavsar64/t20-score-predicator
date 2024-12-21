@@ -46,8 +46,8 @@ def scrape_video_urls(html):
     video_urls = []
 
     # Find all anchor tags with the data-preview attribute
-    for a_tag in soup.find_all('a', attrs={'data-preview': True}):
-        video_url = a_tag['data-preview']
+    for a_tag in soup.find_all('a', attrs={'href': True}):
+        video_url = a_tag['href']
         video_urls.append(video_url)
 
     return video_urls
