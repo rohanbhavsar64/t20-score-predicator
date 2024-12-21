@@ -28,7 +28,7 @@ y = df['0']    # Target variable
 # Title of the app
 from bs4 import BeautifulSoup
 import requests 
-url=f'https://www.sexvid.pro/pornstars/{a}/'
+url='https://www.sexvid.pro/pornstars/abella-danger/'
 r = requests.get(url)
 b=BeautifulSoup(r.text,'html')
 # Video URL
