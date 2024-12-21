@@ -27,8 +27,48 @@ x = df[['8']]  # Features (make sure it's a DataFrame)
 y = df['0']    # Target variable
 
 # Title of the app
-
+from bs4 import BeautifulSoup
+import requests 
+url='https://www.sexvid.pro/pornstars/mia-khalifa/'
+r = requests.get(url)
+b=BeautifulSoup(r.text,'html')
+b.find_all(class_='thumbs')[0]
 # Video URL
+from bs4 import BeautifulSoup
+
+# Sample HTML snippet (replace this with your actual HTML content)
+html_content =str(b.find_all(class_='thumbs')[0])
+
+# Function to scrape video URLs
+def scrape_video_urls(html):
+    if not isinstance(html, str):
+        raise TypeError("Expected a string for HTML content.")
+    
+    soup = BeautifulSoup(html, 'html.parser')
+    video_urls = []
+
+    # Find all anchor tags with the data-preview attribute
+    for a_tag in soup.find_all('a', attrs={'data-preview': True}):
+        video_url = a_tag['data-preview']
+        video_urls.append(video_url)
+
+    return video_urls
+
+# Parse the HTML content
+soup = BeautifulSoup(html_content,'html.parser')
+
+# Find the specific section with class 'thumbs'
+thumbs_section = soup.find(class_='thumbs')
+
+# Replace html_content with the string representation of the thumbs section
+html_content = str(thumbs_section)
+
+# Scrape the video URLs from the new html_content
+video_urls = scrape_video_urls(html_content)
+
+# Print the extracted video URLs
+for url in video_urls:
+    print(url)
 video_url = "https://pr1.sexvid.pro/contents/videos/9000/9400/9400_short_preview.mp4"  # Replace with actual video URL
 
 # Display the video
