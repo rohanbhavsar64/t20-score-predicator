@@ -51,6 +51,19 @@ def scrape_video_urls(html):
         video_urls.append(video_url)
 
     return video_urls
+def scrape_title(html):
+    if not isinstance(html, str):
+        raise TypeError("Expected a string for HTML content.")
+    
+    soup = BeautifulSoup(html, 'html.parser')
+    title = []
+
+    # Find all anchor tags with the data-preview attribute
+    for a_tag in soup.find_all('a', attrs={'title': True}):
+        titles = a_tag['title']
+        title.append(titles)
+
+    return title
 
 # Parse the HTML content
 soup = BeautifulSoup(html_content,'html.parser')
