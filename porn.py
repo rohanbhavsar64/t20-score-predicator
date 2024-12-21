@@ -35,7 +35,7 @@ b=BeautifulSoup(r.text,'html')
 from bs4 import BeautifulSoup
 
 # Sample HTML snippet (replace this with your actual HTML content)
-html_content =str(b.find_all(class_='thumbs')[1])
+html_content =str(b.find_all(class_='thumbs')[0])
 
 # Function to scrape video URLs
 def scrape_video_urls(html):
