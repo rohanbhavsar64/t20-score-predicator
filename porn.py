@@ -32,7 +32,6 @@ import requests
 url='https://www.sexvid.pro/pornstars/mia-khalifa/'
 r = requests.get(url)
 b=BeautifulSoup(r.text,'html')
-b.find_all(class_='thumbs')[0]
 # Video URL
 from bs4 import BeautifulSoup
 
