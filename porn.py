@@ -76,7 +76,7 @@ html_content = str(thumbs_section)
 
 # Scrape the video URLs from the new html_content
 video_urls = scrape_video_urls(html_content)
-title = scrape_tile(html_content)
+title = scrape_title(html_content)
 # Print the extracted video URLs
 l=[]
 l1=[]
