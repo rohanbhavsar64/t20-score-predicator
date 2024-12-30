@@ -58,7 +58,7 @@ df['last_five_wicket'] = last_five1
 
 first['inning']=1
 
-
+st.write(first)
 match_df=df.merge(first,left_on='matchId',right_on='matchId')
 
 match_df['rrr']=((match_df['runs_x_y']-match_df['Score'])*6)/match_df['balls_left']
