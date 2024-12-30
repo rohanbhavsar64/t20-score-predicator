@@ -21,36 +21,7 @@ df['balls_left']=120-(6*df['overs'])-df['ball']
 df['crr']=(df['Score']*6)/(120-df['balls_left'])
 groups = df.groupby('matchId')
 match_ids =df['matchId'].unique()
-import pandas as pd
-
-# Ensure the 'runs_y' column is numeric
-df['runs_y'] = pd.to_numeric(df['runs_y'], errors='coerce')
-
-# Fill missing values in 'runs_y' with 0 (or another strategy)
-df['runs_y'] = df['runs_y'].fillna(0)
-
-# Ensure the 'matchId' column doesn't contain NaN values
-df = df.dropna(subset=['matchId'])
-
-# Group by 'matchId'
-groups = df.groupby('matchId')
-
-match_ids = df['matchId'].unique()
-import pandas as pd
-
-# Ensure the 'runs_y' column is numeric
-df['runs_y'] = pd.to_numeric(df['runs_y'], errors='coerce')
-
-# Fill missing values in 'runs_y' with 0 (or another strategy)
-df['runs_y'] = df['runs_y'].fillna(0)
-
-# Ensure the 'matchId' column doesn't contain NaN values
-df = df.dropna(subset=['matchId'])
-
-# Group by 'matchId'
-groups = df.groupby('matchId')
-
-match_ids = df['matchId'].unique()
+st.write(df)
 last_five = []
 
 # Iterate over matchIds to calculate rolling sum for 'runs_y'
