@@ -36,32 +36,52 @@ df = df.dropna(subset=['matchId'])
 groups = df.groupby('matchId')
 
 match_ids = df['matchId'].unique()
+import pandas as pd
+
+# Ensure the 'runs_y' column is numeric
+df['runs_y'] = pd.to_numeric(df['runs_y'], errors='coerce')
+
+# Fill missing values in 'runs_y' with 0 (or another strategy)
+df['runs_y'] = df['runs_y'].fillna(0)
+
+# Ensure the 'matchId' column doesn't contain NaN values
+df = df.dropna(subset=['matchId'])
+
+# Group by 'matchId'
+groups = df.groupby('matchId')
+
+match_ids = df['matchId'].unique()
 last_five = []
 
-# Iterate over matchIds
+# Iterate over matchIds to calculate rolling sum for 'runs_y'
 for id in match_ids:
     group = groups.get_group(id)
     
-    # Ensure the group has enough data (at least 24 rows)
-    if len(group) >= 24:
-        # Apply the rolling sum for the 'runs_y' column
-        last_five.extend(group.rolling(window=24).sum()['runs_y'].values.tolist())
+    # Apply the rolling sum for the 'runs_y' column
+    # Drop NaN values after rolling operation or fill them
+    rolling_runs = group.rolling(window=24).sum()['runs_y'].fillna(0).tolist()
+    
+    # Extend the results into the last_five list
+    last_five.extend(rolling_runs)
 
 # Add the rolling sums as a new column
 df['last_five_runs'] = last_five
 
 # Calculate the rolling sum for 'player_out'
 last_five1 = []
+
 for id in match_ids:
     group = groups.get_group(id)
     
-    # Ensure the group has enough data (at least 24 rows)
-    if len(group) >= 24:
-        # Apply the rolling sum for the 'player_out' column
-        last_five1.extend(group.rolling(window=24).sum()['player_out'].values.tolist())
+    # Apply the rolling sum for the 'player_out' column
+    rolling_wickets = group.rolling(window=24).sum()['player_out'].fillna(0).tolist()
+    
+    # Extend the results into the last_five1 list
+    last_five1.extend(rolling_wickets)
 
 # Add the rolling sums for 'player_out' as a new column
 df['last_five_wicket'] = last_five1
+
 
 
 first['inning']=1
