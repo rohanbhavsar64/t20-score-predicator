@@ -46,7 +46,7 @@ for id in match_ids:
     group = groups.get_group(id)
     
     # Apply the rolling sum for the 'player_out' column
-    rolling_wickets = group.rolling(window=24).sum()['player_out'].fillna(0).tolist()
+    rolling_wickets = group.rolling(window=24)['player_out'].sum().fillna(0).tolist()
     
     # Extend the results into the last_five1 list
     last_five1.extend(rolling_wickets)
