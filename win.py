@@ -31,7 +31,7 @@ for id in match_ids:
     
     # Apply the rolling sum for the 'runs_y' column
     # Drop NaN values after rolling operation or fill them
-    rolling_runs = group.rolling(window=24).sum()['runs_y'].fillna(0).tolist()
+    rolling_runs = group.rolling(window=24)['runs_y'].sum().fillna(0).tolist()
     
     # Extend the results into the last_five list
     last_five.extend(rolling_runs)
