@@ -21,20 +21,47 @@ df['balls_left']=120-(6*df['overs'])-df['ball']
 df['crr']=(df['Score']*6)/(120-df['balls_left'])
 groups = df.groupby('matchId')
 match_ids =df['matchId'].unique()
-last_five = []
-for id in match_ids:
-    last_five.extend(groups.get_group(id).rolling(window=24).sum()['runs_y'].values.tolist())
+import pandas as pd
 
+# Ensure the 'runs_y' column is numeric
+df['runs_y'] = pd.to_numeric(df['runs_y'], errors='coerce')
+
+# Fill missing values in 'runs_y' with 0 (or another strategy)
+df['runs_y'] = df['runs_y'].fillna(0)
+
+# Ensure the 'matchId' column doesn't contain NaN values
+df = df.dropna(subset=['matchId'])
+
+# Group by 'matchId'
 groups = df.groupby('matchId')
 
 match_ids = df['matchId'].unique()
+last_five = []
+
+# Iterate over matchIds
+for id in match_ids:
+    group = groups.get_group(id)
+    
+    # Ensure the group has enough data (at least 24 rows)
+    if len(group) >= 24:
+        # Apply the rolling sum for the 'runs_y' column
+        last_five.extend(group.rolling(window=24).sum()['runs_y'].values.tolist())
+
+# Add the rolling sums as a new column
+df['last_five_runs'] = last_five
+
+# Calculate the rolling sum for 'player_out'
 last_five1 = []
 for id in match_ids:
-    last_five1.extend(groups.get_group(id).rolling(window=24).sum()['player_out'].values.tolist())
+    group = groups.get_group(id)
+    
+    # Ensure the group has enough data (at least 24 rows)
+    if len(group) >= 24:
+        # Apply the rolling sum for the 'player_out' column
+        last_five1.extend(group.rolling(window=24).sum()['player_out'].values.tolist())
 
-df['last_five_runs']=last_five
-
-df['last_five_wicket']=last_five1
+# Add the rolling sums for 'player_out' as a new column
+df['last_five_wicket'] = last_five1
 
 
 first['inning']=1
