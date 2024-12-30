@@ -24,7 +24,7 @@ df
 df.drop(columns=[
      'tossWinner'
 ],inplace=True)
-
+df['wickets']=df.groupby('matchId')['player_out'].cumsum()
 df['over']=df['balls'].astype(str)
 
 df['overs']=df['over'].str.split('.').str.get(0).astype(int)
@@ -70,7 +70,7 @@ match_df['x1']=match_df['runs_x_x']-match_df['runs_x_y']
 
 match_df['winner']=match_df['x1'].apply(lambda x:1 if x >= 0 else 0)
 
-df1=match_df[['battingTeam_x','bowlingTeam_x','city_y','runs_left','balls_left','player_out_x','runs_x_y','crr','rrr','winner','last_five_runs']]
+df1=match_df[['battingTeam_x','bowlingTeam_x','city_y','runs_left','balls_left','wickets','runs_x_y','crr','rrr','winner','last_five_runs']]
 
 match_df.info()
 
