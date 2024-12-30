@@ -60,7 +60,7 @@ first['inning']=1
 
 st.write(first)
 # Example: Splitting by a delimiter (e.g., a space or comma)
-first['matchId'] = first['matchId'].str.split().str.get(0).astype(int)
+first['matchId'] = first['matchId'].str.split('_').str.get(1).astype(int)
 match_df=df.merge(first,left_on='matchId',right_on='matchId')
 
 match_df['rrr']=((match_df['runs_x_y']-match_df['Score'])*6)/match_df['balls_left']
